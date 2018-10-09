@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<label for="txtnombre">Nombre</label>
 	<input type="text" id="txtnombre"name="txtnombre">
 	<button id="btnguardar" class="btn btn-primary">Guardar</button>
-	<button id="generar_excel" class="btn btn-primary">Exportar a excel</button>
+	<button id="generar_excel" class="btn btn-primary" formaction="<?php base_url();?>ctr_cliente/crearxls">Exportar a excel</button>
 </form>
 <div id="div_contenedor">
 	
@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$(document).ready(function(){
 		cargar_tabla();
 		//funcion generar excel
-		$('#generar_excel').click(function(e){
+		/*$('#generar_excel').click(function(e){
 			e.preventDefault();
 			$.ajax({
 				url: '<?php base_url();?>ctr_cliente/crearxls',
@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         		}
 			});
 
-		});
+		});*/
 		//fin generar excel
 
 		//funcion guardar
