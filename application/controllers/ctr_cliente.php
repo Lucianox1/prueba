@@ -6,8 +6,18 @@ class ctr_cliente extends CI_Controller {
 	
 	public function __construct()
 	{
+
 		parent::__construct();
+		$this->load->library("xlsxwritter");
 		$this->load->model("m_cliente");
+		
+
+	}
+
+	public function crearxls(){
+		$archivo = new xlsxwritter();
+		$datos = self::cargar_todo();
+
 	}
 
 	//ok
@@ -15,7 +25,18 @@ class ctr_cliente extends CI_Controller {
 
 		$rut = $this->input->post("rut");
 		$nombre = $this->input->post("nombre");
-		$this->m_cliente->guardar($rut,$nombre);
+		$id = $this->input->post("id_c");
+
+		if(!empty($rut) && !empty($nombre) && empty($id)) {
+
+			$this->m_cliente->guardar($rut,$nombre);
+
+		}elseif (!empty($rut) && !empty($nombre) && !empty($id)) {
+
+			$this->m_cliente->modificar($id,$rut,$nombre);
+
+		}
+		
 		
 	}
 	//ok

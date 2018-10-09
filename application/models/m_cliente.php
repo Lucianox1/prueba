@@ -23,6 +23,16 @@ class m_cliente extends CI_Model
 
 	}
 
+	public function get_rut($rut){
+		$sql = "SELECT rut FROM clientes where rut = ".$rut;
+		$consulta = $this->db->query($sql);
+		$row = $consulta->row();
+		if (isset($row)) {
+			return $row->rut;
+		}
+		
+	}
+
 	public function eliminar($id){
 		$sql = "DELETE FROM clientes WHERE id = ".$id;
 		$this->db->query($sql);

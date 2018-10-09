@@ -13,8 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<input type="text" id="txtrut" name="txtrut">
 	<label for="txtnombre">Nombre</label>
 	<input type="text" id="txtnombre"name="txtnombre">
-	<button id="btnguardar">Guardar</button>
-	<button class="btn btn-primary">Exportar a excel</button>
+	<button id="btnguardar" class="btn btn-primary">Guardar</button>
+	<button id="generar_excel" class="btn btn-primary">Exportar a excel</button>
 </form>
 <div id="div_contenedor">
 	
@@ -29,11 +29,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 <script type="text/javascript">
+	var id_cliente = null;
+
 	$(document).ready(function(){
 		cargar_tabla();
+		//funcion generar excel
+		$('#generar_excel').click(function(e){
+			e.preventDefault();
+			$.ajax({
+				url: '<?php base_url();?>ctr_cliente/crearxls',
+				type: 'POST',
+				success: function (data) {
+					alert(data);
+				},
+        		error: function (jqXHR, textStatus, errorThrown) { 
+        			
+        		},
+        		complete : function (xhr, status){
+        			//alert(xhr.responseText);
+        			//cargar_tabla();
+
+        		}
+			});
+
+		});
+		//fin generar excel
 
 		//funcion guardar
-
 		$('#btnguardar').click(function(e){
 			e.preventDefault();
 			var rut = $('#txtrut').val();
@@ -42,15 +64,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$.ajax({
 				url: '<?php base_url();?>ctr_cliente/guardar',
 				type: 'POST',
-				data: {'rut': rut,'nombre': nombre},
+				data: {'rut': rut,'nombre': nombre,'id_c': id_cliente},
 				success: function (data) {
-					//alert(""+data);
+					alert(""+data);
 				},
         		error: function (jqXHR, textStatus, errorThrown) { 
         			
         		},
         		complete : function (xhr, status){
-        			//alert(xhr.responseText);
+
         			cargar_tabla();
 
         		}
@@ -83,21 +105,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		$('html').on("click",".btnmodificar",function(e){
 			e.preventDefault();
-			
-			$.ajax({
-				url: '<?php base_url();?>ctr_cliente/modificar',
-				type: 'POST',
-				data: {'id': this.id},
-				success: function (data) {
-					//alert(""+data);
-				},
-        		error: function (jqXHR, textStatus, errorThrown) { 
-        			
-        		},
-        		complete : function (xhr, status){
-        			cargar_tabla();
-        		}
-			});
+			id_cliente = this.id;
+			$('#txtrut').val($(this).parents("tr").find("td").eq(0).text());
+			$('#txtnombre').val($(this).parents("tr").find("td").eq(1).text());
 			
 		});
 
@@ -120,6 +130,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				},
         		error: function (jqXHR, textStatus, errorThrown) { 
         			
+        		},
+        		complete : function (xhr, status){
+        			$('#txtnombre').val('');
+        			$('#txtrut').val('');
+        			id_cliente = null;
         		}
 			});
 		}
