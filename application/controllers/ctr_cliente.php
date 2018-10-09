@@ -10,7 +10,7 @@ class ctr_cliente extends CI_Controller {
 		$this->load->model("m_cliente");
 	}
 
-
+	//ok
 	public function guardar(){
 
 		$rut = $this->input->post("rut");
@@ -18,7 +18,7 @@ class ctr_cliente extends CI_Controller {
 		$this->m_cliente->guardar($rut,$nombre);
 		
 	}
-	/*
+	//ok
 	public function cargar_todo(){
 		$r = $this->m_cliente->traer_todo();
 		echo json_encode($r);
@@ -27,6 +27,6 @@ class ctr_cliente extends CI_Controller {
 	public function eliminar(){
 		$id = $this->input->post("id");
 		$this->m_cliente->eliminar($id);
-	}*/
+	}
 
 }
