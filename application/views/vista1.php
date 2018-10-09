@@ -38,7 +38,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			e.preventDefault();
 			$.ajax({
 				url: '<?php base_url();?>ctr_cliente/crearxls',
-				type: 'POST',
 				success: function (data) {
 					alert(data);
 				},
@@ -66,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				type: 'POST',
 				data: {'rut': rut,'nombre': nombre,'id_c': id_cliente},
 				success: function (data) {
-					alert(""+data);
+					//alert(""+data);
 				},
         		error: function (jqXHR, textStatus, errorThrown) { 
         			

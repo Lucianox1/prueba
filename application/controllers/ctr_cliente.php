@@ -8,17 +8,29 @@ class ctr_cliente extends CI_Controller {
 	{
 
 		parent::__construct();
-		$this->load->library("xlsxwritter");
+		//$this->load->library("XLSXWriter");
 		$this->load->model("m_cliente");
+
+
 		
 
 	}
 
-	public function crearxls(){
-		$archivo = new xlsxwritter();
-		$datos = self::cargar_todo();
+	//public function crearxls(){
 
-	}
+		//$datos = self::cargar_todo();
+/*
+		$data = array(
+    	array('year','month','amount'),
+    	array('2003','1','220'),
+    	array('2003','2','153.5'),
+		);
+
+		$writer = new XLSXWriter();
+		$writer->writeSheet($data);
+		$writer->writeToFile('output.xlsx');
+*/
+	//}
 
 	//ok
 	public function guardar(){
@@ -26,6 +38,14 @@ class ctr_cliente extends CI_Controller {
 		$rut = $this->input->post("rut");
 		$nombre = $this->input->post("nombre");
 		$id = $this->input->post("id_c");
+
+		//$validacion = $this->m_cliente->get_rut($rut);
+		//echo $validacion;
+		/*if ($rut == $validacion ) {//si el rut ingresado ya esta registrado
+			
+		}else{
+			
+		}*/
 
 		if(!empty($rut) && !empty($nombre) && empty($id)) {
 

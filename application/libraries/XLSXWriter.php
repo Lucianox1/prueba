@@ -2,9 +2,7 @@
 /*
  * @license MIT License
  * */
-
-defined('BASEPATH') OR exit('No direct script access allowed');
-class xlsxwritter
+class XLSXWriter
 {
 	//http://www.ecma-international.org/publications/standards/Ecma-376.htm
 	//http://officeopenxml.com/SSstyles.php
