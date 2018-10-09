@@ -8,18 +8,15 @@ class ctr_cliente extends CI_Controller {
 	{
 
 		parent::__construct();
-		//$this->load->library("XLSXWriter");
+		$this->load->library("XLSXWriter");
 		$this->load->model("m_cliente");
-
-
-		
-
 	}
 
-	//public function crearxls(){
+
+	public function crearxls(){
 
 		//$datos = self::cargar_todo();
-/*
+
 		$data = array(
     	array('year','month','amount'),
     	array('2003','1','220'),
@@ -28,9 +25,9 @@ class ctr_cliente extends CI_Controller {
 
 		$writer = new XLSXWriter();
 		$writer->writeSheet($data);
-		$writer->writeToFile('output.xlsx');
-*/
-	//}
+		print $writer->writeToFile('output.xlsx');
+
+	}
 
 	//ok
 	public function guardar(){
