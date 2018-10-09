@@ -8,7 +8,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-
+<form>
+	<input type="text" id="txtrut" name="txtrut"><input type="text" id="txtnombre"name="txtnombre"><button id="btnguardar">Guardar</button>
+</form>
 
 
 <script
@@ -20,7 +22,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){
-		alert('jquery funcionando');
+		
+
+
+		$('#btnguardar').click(function(e){
+			e.preventDefault();
+			var rut = $('#txtrut').val();
+			var nombre = $('#txtnombre').val();
+			
+			$.ajax({
+				url: '<?php base_url();?>ctr_cliente/guardar',
+				type: 'POST',
+				data: {'rut': rut,'nombre': nombre},
+				success: function (data) {
+					//alert(""+data);
+				},
+        		error: function (jqXHR, textStatus, errorThrown) { 
+        			
+        		},
+        		complete : function (xhr, status){
+        			//alert(xhr.responseText);
+
+        		}
+			});
+		  
+		});
+
+
 	});
 </script>
 </html>
