@@ -38,8 +38,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			e.preventDefault();
 			$.ajax({
 				url: '<?php base_url();?>ctr_cliente/crearxls',
-				success: function (data) {
-					alert(data);
+				success: function (respuesta) {
+					console.log(respuesta);
 				},
         		error: function (jqXHR, textStatus, errorThrown) { 
         			
