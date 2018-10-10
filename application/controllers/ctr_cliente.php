@@ -20,13 +20,27 @@ class ctr_cliente extends CI_Controller {
 		$arraypadre = array();
 		$arrayhijo = array();
 		foreach ($datos as $key ) {
-			unset($arrayhijo);
 			$arrayhijo = array($key->id,$key->rut,$key->nombre);
-			array_push($arraypadre,$arrayhijo);
+			//array_push($arraypadre,$arrayhijo);
+			//unset($arrayhijo);
+			$arraypadre[] = $arrayhijo;
 			unset($arrayhijo);
 		}
+		/*
 		echo var_dump($arraypadre);
-		echo "<br></br>";
+		echo "</br></br>";
+		$rows = array(
+    	array('2003','1','-50.5','2010-01-01 23:00:00','2012-12-31 23:00:00'),
+    	array('2003','=B1', '23.5','2010-01-01 00:00:00','2012-12-31 00:00:00'),);
+    	echo var_dump($rows);
+    	echo "</br></br>";
+    	foreach ($rows as $row) {
+    		echo "</br></br>".var_dump($row);
+    	}
+    	echo "</br></br>";
+    	foreach ($arraypadre as $row) {
+    		echo "</br></br>".var_dump($row);
+    	}*/
 
 
 		ini_set('display_errors', 0);
@@ -38,21 +52,19 @@ header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetm
 header('Content-Transfer-Encoding: binary');
 header('Cache-Control: must-revalidate');
 header('Pragma: public');
+$encabezado = array('id'=>'integer','rut'=>'string','nombre'=>'string');
 
-$rows = array(
-    array('2003','1','-50.5','2010-01-01 23:00:00','2012-12-31 23:00:00'),
-    array('2003','=B1', '23.5','2010-01-01 00:00:00','2012-12-31 00:00:00'),
-);
 
 $writer = new XLSXWriter();
 $writer->setAuthor('Some Author'); 
-foreach($rows as $row)
+$writer->writeSheetHeader('clientes',$encabezado);
+foreach($arraypadre as $row)
 	$writer->writeSheetRow('clientes', $row);
 $writer->writeToStdOut();
 exit(0);
 
 
-	}
+}
 
 	//ok
 	public function guardar(){
