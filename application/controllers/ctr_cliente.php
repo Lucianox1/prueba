@@ -44,24 +44,24 @@ class ctr_cliente extends CI_Controller {
 
 
 		ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-error_reporting(E_ALL & ~E_NOTICE);
-$filename = "example.xlsx";
-header('Content-disposition: attachment; filename="'.XLSXWriter::sanitize_filename($filename).'"');
-header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-header('Content-Transfer-Encoding: binary');
-header('Cache-Control: must-revalidate');
-header('Pragma: public');
-$encabezado = array('id'=>'integer','rut'=>'string','nombre'=>'string');
+		ini_set('log_errors', 1);
+		error_reporting(E_ALL & ~E_NOTICE);
+		$filename = "clientes.xlsx";
+		header('Content-disposition: attachment; filename="'.XLSXWriter::sanitize_filename($filename).'"');
+		header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		header('Content-Transfer-Encoding: binary');
+		header('Cache-Control: must-revalidate');
+		header('Pragma: public');
+		$encabezado = array('id'=>'integer','rut'=>'string','nombre'=>'string');
 
 
-$writer = new XLSXWriter();
-$writer->setAuthor('Some Author'); 
-$writer->writeSheetHeader('clientes',$encabezado);
-foreach($arraypadre as $row)
-	$writer->writeSheetRow('clientes', $row);
-$writer->writeToStdOut();
-exit(0);
+		$writer = new XLSXWriter();
+		$writer->setAuthor('Bernardo P'); 
+		$writer->writeSheetHeader('clientes',$encabezado);
+		foreach($arraypadre as $row)
+			$writer->writeSheetRow('clientes', $row);
+		$writer->writeToStdOut();
+		exit(0);
 
 
 }
